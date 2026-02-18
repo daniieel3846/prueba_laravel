@@ -49,13 +49,7 @@ class ContactoController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        $contacto = Contacto::with('entidad')->find($id);
-
-        if (!$contacto) {
-            return response()->json(['error' => 'Contacto no encontrado'], Response::HTTP_NOT_FOUND);
-        }
-
-        return response()->json($contacto, Response::HTTP_OK);
+        return response()->json($contacto->load('entidad'), Response::HTTP_OK);
     }
 
     /**
