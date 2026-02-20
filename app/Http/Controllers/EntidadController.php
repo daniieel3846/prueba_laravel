@@ -102,4 +102,10 @@ class EntidadController extends Controller
         $entidad->delete();
         return response()->json(['message' => 'Entidad eliminada correctamente'], Response::HTTP_OK);
     }
+    
+    public function deleteMultiple(Request $request) {
+        $ids = $request->input('ids');
+        Entidad::whereIn('id', $ids)->delete();
+        return response()->json(['message' => 'Eliminados correctamente'], 200);
+    }
 }
